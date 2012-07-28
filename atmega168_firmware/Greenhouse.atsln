@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Greenhouse", "Greenhouse\Greenhouse.cproj", "{C72ACADA-6DBC-40E9-981B-BC62460B3EC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C72ACADA-6DBC-40E9-981B-BC62460B3EC0}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C72ACADA-6DBC-40E9-981B-BC62460B3EC0}.Debug|AVR.Build.0 = Debug|AVR
+		{C72ACADA-6DBC-40E9-981B-BC62460B3EC0}.Release|AVR.ActiveCfg = Release|AVR
+		{C72ACADA-6DBC-40E9-981B-BC62460B3EC0}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
