@@ -1,0 +1,68 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('Greenhouse')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
+                    ->appendStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                    ->appendStylesheet($this->basePath() . '/css/style.css')
+                    ->appendStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css') ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()->appendFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                                  ->appendFile($this->basePath() . '/js/jquery-1.7.2.min.js') ?>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="<?php echo $this->url('home') ?>">Greenhouse</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="<?php echo $this->url('home') ?>">Home</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <?php if (!$this->zfcUserIdentity()): ?>
+              <li><a href="<?php echo $this->url('zfcuser/login') ?>">Sign In</a></li>
+              <?php else: ?>
+              <li>
+                <a href="<?php echo $this->url('zfcuser') ?>">
+                    <div style="float:left;margin-top:-7px"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail(), array('img_size' => 32)); ?></div>
+                    <span style="padding-left:10px"><?php echo $this->escapeHtml($this->zfcUserDisplayName()); ?></span>
+                </a>
+              </li>
+              <?php endif; ?>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <?php echo $this->content; ?>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2012 Adam Lundrigan.  Built on <a href="http://github.com/zendframework/zf2" target="_blank">Zend Framework 2</a></p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

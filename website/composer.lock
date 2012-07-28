@@ -1,0 +1,39 @@
+{
+    "hash": "ea8230bda0af6f3dcb2a13bab5c3064b",
+    "packages": [
+        {
+            "package": "zendframework/zendframework",
+            "version": "dev-master",
+            "alias-pretty-version": "2.0.x-dev",
+            "alias-version": "2.0.9999999.9999999-dev"
+        },
+        {
+            "package": "zendframework/zendframework",
+            "version": "dev-master",
+            "source-reference": "06fd0cfa44a317fbff76e925f062c4b9eae0d1cc",
+            "commit-date": "1343421022"
+        },
+        {
+            "package": "zf-commons/zfc-base",
+            "version": "dev-master",
+            "source-reference": "1676e2abadde922741b53e58f4969dd81a41a366",
+            "commit-date": "1342033549"
+        },
+        {
+            "package": "zf-commons/zfc-user",
+            "version": "dev-master",
+            "source-reference": "d2f034d4ef1c57df6e5d5324840d4c0d7921ffe5",
+            "commit-date": "1343339074"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "zendframework/zendframework": 20,
+        "zf-commons/zfc-base": 20,
+        "zf-commons/zfc-user": 20
+    }
+}
