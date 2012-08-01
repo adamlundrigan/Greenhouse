@@ -46,6 +46,13 @@ class Module implements
                     $service->setSensorMapper($sm->get('gh_sensor_mapper'));
                     return $service;
                 },
+                'gh_sensor_reading_mapper' => function ($sm) {
+                    $mapper = new Mapper\SensorReading();
+                    $mapper->setDbAdapter($sm->get('gh_database_adapter'));
+                    $mapper->setEntityPrototype(new Entity\SensorReading);
+                    $mapper->setHydrator(new Mapper\SensorReadingHydrator());
+                    return $mapper;
+                },
             ),
         );
     }
