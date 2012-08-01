@@ -1,0 +1,7 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Greenhouse Module Tests">
+            <directory>./GreenhouseTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
