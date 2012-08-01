@@ -15,4 +15,11 @@ class Sensor extends AbstractdbMapper
         $entity = $this->selectWith($select)->current();
         return $entity;
     }
+
+    public function insert($entity, $tableName = null, HydratorInterface $hydrator = null)
+    {
+        $result = parent::insert($entity,$tableName,$hydrator);
+        $entity->setId($result->getGeneratedValue());
+        return $result;
+    }
 }

@@ -34,7 +34,7 @@ class SensorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($result);
 
         $sensor = $this->insertDummySensor();
-        $this->assertEquals('TEMP1', $sensor->getCode());
+        $this->assertEquals(1, $sensor->getId());
 
         $result = $this->mapper->findByCode('TEMP1');
         $this->assertInstanceOf('Greenhouse\Entity\Sensor', $result);
