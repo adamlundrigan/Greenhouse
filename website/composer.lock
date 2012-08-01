@@ -10,20 +10,20 @@
         {
             "package": "zendframework/zendframework",
             "version": "dev-master",
-            "source-reference": "06fd0cfa44a317fbff76e925f062c4b9eae0d1cc",
-            "commit-date": "1343421022"
+            "source-reference": "59929bfe514d557e6f3e3441b6a3c5fa78fa2bbf",
+            "commit-date": "1343768700"
         },
         {
             "package": "zf-commons/zfc-base",
             "version": "dev-master",
-            "source-reference": "1676e2abadde922741b53e58f4969dd81a41a366",
-            "commit-date": "1342033549"
+            "source-reference": "481965df90ac484c5f4299013b0a158df54cf935",
+            "commit-date": "1343755534"
         },
         {
             "package": "zf-commons/zfc-user",
             "version": "dev-master",
-            "source-reference": "d2f034d4ef1c57df6e5d5324840d4c0d7921ffe5",
-            "commit-date": "1343339074"
+            "source-reference": "74334f1d190c44eaa50046f8f7fe613c2046ea6d",
+            "commit-date": "1343652081"
         }
     ],
     "packages-dev": null,
