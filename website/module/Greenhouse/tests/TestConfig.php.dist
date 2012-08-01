@@ -12,7 +12,7 @@ return array(
             ),
             'db' => array(
                 'driver'   => 'pdo',
-                'dsn'      => 'sqlite:' . __DIR__ . '/data/test.db',
+                'dsn'      => 'sqlite::memory:',
             ),
         ),
     ),
