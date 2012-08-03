@@ -20,9 +20,9 @@ class SensorReadingTest extends PHPUnit_Framework_TestCase
     protected function insertDummySensorReading()
     {
         $reading = new SensorReading;
-        $reading->getSensorId('1')
-               ->setValue(22.22)
-               ->setDateTime(new \DateTime());
+        $reading->setSensorId('1')
+                ->setValue(22.22)
+                ->setDateTime(new \DateTime());
         $this->mapper->insert($reading);
         return $reading;
     }
@@ -30,7 +30,7 @@ class SensorReadingTest extends PHPUnit_Framework_TestCase
     public function testCanInsertSensorReading()
     {
         $result = $this->mapper->findLatestBySensorId(1);
-        $this->assertFalse($result);
+        $this->assertEquals(0, count($result));
 
         $reading = $this->insertDummySensorReading();
         $this->assertEquals(1, $reading->getId());

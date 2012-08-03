@@ -1,6 +1,7 @@
 <?php
 return array(
     'modules' => array(
+        'ZfcBase',
         'Greenhouse',
     ),
     'module_listener_options' => array(
