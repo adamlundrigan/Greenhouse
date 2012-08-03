@@ -1,9 +1,9 @@
 <?php
 return array(
     'modules' => array(
-        'Greenhouse',
         'ZfcBase',
         'ZfcUser',
+        'Greenhouse',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(
