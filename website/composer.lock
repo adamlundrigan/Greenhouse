@@ -4,12 +4,6 @@
         {
             "package": "zendframework/zendframework",
             "version": "dev-master",
-            "alias-pretty-version": "2.0.x-dev",
-            "alias-version": "2.0.9999999.9999999-dev"
-        },
-        {
-            "package": "zendframework/zendframework",
-            "version": "dev-master",
             "source-reference": "release-2.0.0rc2",
             "commit-date": "1343939269"
         },
