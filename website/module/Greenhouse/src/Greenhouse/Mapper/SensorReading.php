@@ -2,6 +2,7 @@
 namespace Greenhouse\Mapper;
 
 use ZfcBase\Mapper\AbstractDbMapper;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class SensorReading extends AbstractdbMapper
 {
