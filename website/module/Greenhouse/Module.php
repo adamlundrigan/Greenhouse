@@ -23,6 +23,15 @@ class Module implements
         );
     }
 
+    public function getViewHelperConfig()
+    {
+        return array(
+            'invokables' => array(
+                'formatDateInterval' => 'Greenhouse\View\Helper\FormatDateInterval',
+            ),
+        );
+    }
+
     public function getServiceConfig()
     {
         return array(
