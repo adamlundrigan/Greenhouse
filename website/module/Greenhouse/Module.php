@@ -30,20 +30,17 @@ class Module implements
                 'gh_database_adapter' => 'Zend\Db\Adapter\Adapter',
             ),
             'factories' => array(
-                'gh_sensor_hydrator' => function ($sm) {
-                    $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
-                    return $hydrator;
-                },
                 'gh_sensor_mapper' => function ($sm) {
                     $mapper = new Mapper\Sensor();
                     $mapper->setDbAdapter($sm->get('gh_database_adapter'));
                     $mapper->setEntityPrototype(new Entity\Sensor);
-                    $mapper->setHydrator($sm->get('gh_sensor_hydrator'));
+                    $mapper->setHydrator(new Mapper\SensorHydrator());
                     return $mapper;
                 },
                 'gh_sensor_service' => function ($sm) {
-                    $service = new Sevice\Sensor();
+                    $service = new Service\Sensor();
                     $service->setSensorMapper($sm->get('gh_sensor_mapper'));
+                    $service->setSensorReadingMapper($sm->get('gh_sensor_reading_mapper'));
                     return $service;
                 },
                 'gh_sensor_reading_mapper' => function ($sm) {

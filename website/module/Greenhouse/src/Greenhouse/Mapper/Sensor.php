@@ -17,6 +17,14 @@ class Sensor extends AbstractDbMapper
         return $entity;
     }
 
+    public function fetchAll()
+    {
+        $select = $this->select();
+        $select->from($this->tableName)->order('code ASC');
+        $resultset = $this->selectWith($select);
+        return $resultset;
+    }
+
     public function insert($entity, $tableName = null, HydratorInterface $hydrator = null)
     {
         $result = parent::insert($entity,$tableName,$hydrator);

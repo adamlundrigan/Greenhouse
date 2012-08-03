@@ -8,6 +8,7 @@ class Sensor
     protected $type;
     protected $position_x;
     protected $position_y;
+    protected $latest_reading;
 
     public function getId() { return $this->id; }
     public function setId($id) { $this->id = $id; return $this; }
@@ -24,4 +25,6 @@ class Sensor
     public function getPositionY() { return $this->position_y; }
     public function setPositionY($y) { $this->position_y = $y; return $this; }
 
+    public function setLatestReading(SensorReading $r) { $this->latest_reading = $r; return $this; }
+    public function getLatestReading() { return $this->latest_reading; }
 }
