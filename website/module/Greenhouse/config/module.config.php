@@ -12,11 +12,38 @@ return array(
                     ),
                 ),
             ),
+            'sensor' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/sensor[/:code]',
+                    'constraints' => array(
+                        'code' => '[a-zA-Z0-9_-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Greenhouse\Controller\Sensor',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'graph' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route'    => '/graph',
+                            'defaults' => array(
+                                'controller' => 'Greenhouse\Controller\Sensor',
+                                'action'     => 'graph',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'Greenhouse\Controller\Index' => 'Greenhouse\Controller\IndexController'
+            'Greenhouse\Controller\Index' => 'Greenhouse\Controller\IndexController',
+            'Greenhouse\Controller\Sensor' => 'Greenhouse\Controller\SensorController',
         ),
     ),
     'view_manager' => array(

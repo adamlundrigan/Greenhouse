@@ -4,7 +4,7 @@
 <?php foreach ( $this->sensors as $sensor ): ?>
         <div class="well">
             <div style="margin: -10px 0 0 -10px;font-size:1.1em;"><?php echo $this->escapeHtml($sensor->getCode()); ?></div>
-
+<img src="<?php echo $this->url('sensor/graph', array('code' => $sensor->getCode())); ?>" />
             <?php $latestReading = $sensor->getLatestReading(); ?>
             <div style="float:right;font-size:1.8em;"><?php echo $this->escapeHtml(is_null($latestReading) ? '--' : $latestReading->getValue()); ?></div>
             <div style="clear:both;"></div>
