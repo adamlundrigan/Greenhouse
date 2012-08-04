@@ -10,7 +10,15 @@ class SensorController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel(array());
+        $sensor_code = $this->params()->fromRoute('code');
+        $sensor = $this->getSensorMapper()->findByCode($sensor_code);
+        if ( ! $sensor instanceof SensorEntity ) {
+            throw new \InvalidArgumentException('Invalid sensor!');
+        } 
+
+        return new ViewModel(array(
+            'sensor' => $sensor
+        ));
     }
 
     public function graphAction()

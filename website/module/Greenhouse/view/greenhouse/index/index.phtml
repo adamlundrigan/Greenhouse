@@ -19,7 +19,9 @@
     <div class="span7">
 <?php foreach ( $this->sensors as $sensor ): ?>
         <div class="well">
-            <div style="margin: -10px 0 0 -10px;font-size:1.1em;"><?php echo $this->escapeHtml($sensor->getCode()); ?></div>
+            <div style="margin: -10px 0 0 -10px;font-size:1.1em;">
+                <a href="<?php echo $this->url('sensor', array('code'=>$sensor->getCode())); ?>"><?php echo $this->escapeHtml($sensor->getCode()); ?></a>
+            </div>
             <img src="<?php echo $this->url('sensor/graph', array('code' => $sensor->getCode())); ?>" />
             <?php $latestReading = $sensor->getLatestReading(); ?>
             <div style="float:right; text-align:center; margin-top:7px">
