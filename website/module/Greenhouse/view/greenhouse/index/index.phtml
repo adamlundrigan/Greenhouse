@@ -1,11 +1,26 @@
 <?php if (!isset($now)) $now = new \DateTime(); ?>
 <div class="row">
-    <div class="span5">...</div>
+    <div class="span5">
+        <div style="height:235px;width:455px;border:5px solid #e2e2e2;">
+<?php foreach ( $this->sensors as $sensor ): ?>
+<?php   $lastValue = $sensor->getLatestReading(); ?>
+            <div id="Sensor<?php echo $sensor->getId(); ?>" class="label label-important" style="width:7px;position:relative;top:<?php echo $sensor->getPositionY();?>px;left:<?php echo $sensor->getPositionX();?>px;">X</div>
+            <script type="text/javascript">
+            $('#Sensor<?php echo $sensor->getId(); ?>').popover({
+                title: '<?php echo $this->escapeJs($sensor->getCode()); ?>',
+                content: '<div style="font-size:1.3em;float:left;"><?php echo $this->escapeJs(is_null($lastValue) ? '--' : $lastValue->getValue()); ?>&deg;</div>'
+                 + '<div style="font-size:1.1em;float:right;"><?php echo $lastValue ? $this->escapeJs($this->formatDateInterval($now->diff($lastValue->getDateTime())).' ago') : ''; ?></div>'
+                 + '<div style="clear:both"></div>'
+            });
+            </script>
+<?php endforeach; ?>
+        </div>
+    </div>
     <div class="span7">
 <?php foreach ( $this->sensors as $sensor ): ?>
         <div class="well">
             <div style="margin: -10px 0 0 -10px;font-size:1.1em;"><?php echo $this->escapeHtml($sensor->getCode()); ?></div>
-<img src="<?php echo $this->url('sensor/graph', array('code' => $sensor->getCode())); ?>" />
+            <img src="<?php echo $this->url('sensor/graph', array('code' => $sensor->getCode())); ?>" />
             <?php $latestReading = $sensor->getLatestReading(); ?>
             <div style="float:right; text-align:center; margin-top:7px">
                 <div style="font-size:1.8em;"><?php echo is_null($latestReading) ? '--' : ($this->escapeHtml($latestReading->getValue()).'&deg;'); ?></div>
