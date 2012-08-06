@@ -21,9 +21,10 @@
 #include "serial.h"
 #include "main.h"
 
-#define AREF_MV 5330.0
 #define CH_TEMP0 0
 #define CH_TEMP1 1
+
+double AREF_MV = 3340.0;
 
 /*  MAIN */
 int main(void)
@@ -55,6 +56,29 @@ int main(void)
 			memset(command, '\0', amt+1);
 			memcpy(command, buf, amt);
 			command = trim_ws(command);
+			
+			if (strcmp(command, "GETVAR AREF_MV") == 0)
+			{
+				char outs[50];
+				snprintf(outs,sizeof(outs),"AREF_MV %4.1f\r\n", AREF_MV);
+				serial_easy_send(outs);
+				continue;
+			}
+			if (strncmp(command, "SETVAR AREF_MV", 14) == 0)
+			{
+				char outs[50];
+				
+				serial_easy_send("OK, SEND VALUE\r\n");
+				snooze();
+				
+				char input[7];
+				serial_rx_get(input, 7);
+				AREF_MV = atof(input);
+				
+				snprintf(outs,sizeof(outs),"AREF_MV %4.1f\r\n", AREF_MV);
+				serial_easy_send(outs);
+				continue;
+			}
 			
 			// Parse out global flags
 			uint8_t doAll = (strcmp(command, "READ ALL") == 0);
@@ -113,7 +137,7 @@ void transmit_reading_temp(uint8_t channel)
 	adc_temp = adc_read(channel);		
 	snprintf(outs,sizeof(outs),"TEMP%d %3.2f\r\n", 
 		channel,
-		((((int)adc_temp) * (5330.0 / 1024.0)) / 10.0) - 273.0
+		((((int)adc_temp) * (AREF_MV / 1024.0)) / 10.0) - 273.0
 	);
 	serial_easy_send(outs);
 }
