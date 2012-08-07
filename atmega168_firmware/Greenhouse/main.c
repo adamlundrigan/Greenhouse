@@ -24,7 +24,7 @@
 #define CH_TEMP0 0
 #define CH_TEMP1 1
 
-double AREF_MV = 3340.0;
+double AREF_MV = 3250.0;
 
 /*  MAIN */
 int main(void)
@@ -57,13 +57,9 @@ int main(void)
 			memcpy(command, buf, amt);
 			command = trim_ws(command);
 			
-			if (strcmp(command, "GETVAR AREF_MV") == 0)
-			{
-				char outs[50];
-				snprintf(outs,sizeof(outs),"AREF_MV %4.1f\r\n", AREF_MV);
-				serial_easy_send(outs);
-				continue;
-			}
+			uint8_t validAction = 0;
+			
+			// Mad configurable variable skillz
 			if (strncmp(command, "SETVAR AREF_MV", 14) == 0)
 			{
 				char outs[50];
@@ -77,24 +73,45 @@ int main(void)
 				
 				snprintf(outs,sizeof(outs),"AREF_MV %4.1f\r\n", AREF_MV);
 				serial_easy_send(outs);
-				continue;
-			}
-			
-			// Parse out global flags
-			uint8_t doAll = (strcmp(command, "READ ALL") == 0);
-			uint8_t doTemp = (strcmp(command, "READ TEMP") == 0);
-			
-			// Process TEMP0 sensor
-			if (doAll || doTemp || strcmp(command, "READ TEMP0") == 0) 
+				validAction=1;
+			}			
+			if (!validAction && strcmp(command, "GETVAR AREF_MV") == 0)
 			{
-				transmit_reading_temp(CH_TEMP0);
-			}
-			// Process TEMP1 sensor
-			if (doAll || doTemp || strcmp(command, "READ TEMP1") == 0) 
-			{
-				transmit_reading_temp(CH_TEMP1);
+				char outs[50];
+				snprintf(outs,sizeof(outs),"AREF_MV %4.1f\r\n", AREF_MV);
+				serial_easy_send(outs);
+				validAction=1;
 			}
 			
+			// Sensor-Related Actions are handled next
+			if (!validAction)
+			{
+				// Parse out global flags
+				uint8_t doAll = (strcmp(command, "READ ALL") == 0);
+				uint8_t doTemp = (strcmp(command, "READ TEMP") == 0);
+			
+				// Process TEMP0 sensor
+				if (doAll || doTemp || ( !validAction && strcmp(command, "READ TEMP0") == 0) )
+				{
+					transmit_reading_temp(CH_TEMP0);
+					validAction = 1;
+				}
+				// Process TEMP1 sensor
+				if (doAll || doTemp || ( !validAction && strcmp(command, "READ TEMP1") == 0) )
+				{
+					transmit_reading_temp(CH_TEMP1);
+					validAction = 1;
+				}
+			}
+			
+			// Echo back unrecognized commands
+			if (!validAction)
+			{
+				char outs[100];
+				snprintf(outs, "INVALID COMMAND: %s\r\n\r\n", command);
+				serial_easy_send(outs);
+			}
+										
 			serial_easy_send("--END\r\n");
 			
 			free(command);
