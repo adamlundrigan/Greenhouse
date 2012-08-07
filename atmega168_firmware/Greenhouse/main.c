@@ -24,7 +24,7 @@
 #define CH_TEMP0 0
 #define CH_TEMP1 1
 
-double AREF_MV = 3250.0;
+double AREF_MV = 3280.0;
 
 /*  MAIN */
 int main(void)
