@@ -12,7 +12,8 @@
 
 void snooze(void);
 void wakeup(void);
-void transmit_reading_temp(uint8_t channel);
+void transmit_reading_temp(char* name, uint8_t channel);
+void transmit_reading_soil_humidity(char* name, uint8_t channel);
 
 
 #endif /* MAIN_H_ */

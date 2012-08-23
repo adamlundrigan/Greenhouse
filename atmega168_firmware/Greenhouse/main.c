@@ -23,6 +23,10 @@
 
 #define CH_TEMP0 0
 #define CH_TEMP1 1
+#define CH_TEMP2 2
+#define CH_SOIL2 3
+#define CH_SOIL1 4
+#define CH_SOIL0 5
 
 double AREF_MV = 3280.0;
 
@@ -93,13 +97,40 @@ int main(void)
 				// Process TEMP0 sensor
 				if (doAll || doTemp || ( !validAction && strcmp(command, "READ TEMP0") == 0) )
 				{
-					transmit_reading_temp(CH_TEMP0);
+					transmit_reading_temp("TEMP0", CH_TEMP0);
 					validAction = 1;
 				}
 				// Process TEMP1 sensor
 				if (doAll || doTemp || ( !validAction && strcmp(command, "READ TEMP1") == 0) )
 				{
-					transmit_reading_temp(CH_TEMP1);
+					transmit_reading_temp("TEMP1", CH_TEMP1);
+					validAction = 1;
+				}
+				// Process TEMP2 sensor
+				if (doAll || doTemp || ( !validAction && strcmp(command, "READ TEMP2") == 0) )
+				{
+					transmit_reading_temp("TEMP2", CH_TEMP2);
+					validAction = 1;
+				}
+				
+				uint8_t doSoil = (strcmp(command, "READ SOIL") == 0);
+				
+				// Process SOIL0 sensor
+				if (doAll || doSoil || ( !validAction && strcmp(command, "READ SOIL0") == 0) )
+				{
+					transmit_reading_soil_humidity("SOIL0", CH_SOIL0);
+					validAction = 1;
+				}
+				// Process SOIL1 sensor
+				if (doAll || doSoil || ( !validAction && strcmp(command, "READ SOIL1") == 0) )
+				{
+					transmit_reading_soil_humidity("SOIL1", CH_SOIL1);
+					validAction = 1;
+				}
+				// Process SOIL2 sensor
+				if (doAll || doSoil || ( !validAction && strcmp(command, "READ SOIL2") == 0) )
+				{
+					transmit_reading_soil_humidity("SOIL2", CH_SOIL2);
 					validAction = 1;
 				}
 			}
@@ -146,15 +177,28 @@ void wakeup(void)
 	_delay_ms(100);
 }
 
-void transmit_reading_temp(uint8_t channel)
+void transmit_reading_temp(char* name, uint8_t channel)
 {
 	char outs[25];
 	uint16_t adc_temp;
 
 	adc_temp = adc_read(channel);		
-	snprintf(outs,sizeof(outs),"TEMP%d %3.2f\r\n", 
-		channel,
+	snprintf(outs,sizeof(outs),"%s %3.2f\r\n", 
+		name,
 		((((int)adc_temp) * (AREF_MV / 1024.0)) / 10.0) - 273.0
+	);
+	serial_easy_send(outs);
+}
+
+void transmit_reading_soil_humidity(char* name, uint8_t channel)
+{
+	char outs[25];
+	uint16_t adc_value;
+
+	adc_value = adc_read(channel);		
+	snprintf(outs,sizeof(outs),"%s %d\r\n", 
+		name,
+		adc_value
 	);
 	serial_easy_send(outs);
 }
